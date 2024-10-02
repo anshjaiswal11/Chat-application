@@ -79,6 +79,7 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
+const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 const formatMessage = require('./utils/messages');
@@ -103,7 +104,13 @@ const Message = mongoose.model('Message', new mongoose.Schema({
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+app.use(cors());
+const io = socketIo(server, {
+   cors: {
+      origin: "*", // Or specify the frontend URL if needed, e.g., 'https://yourfrontend.com'
+      methods: ["GET", "POST"],
+   },
+});
 
 // set static file
 app.use(express.static(path.join(__dirname, 'public')));
