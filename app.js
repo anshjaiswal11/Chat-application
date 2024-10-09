@@ -91,7 +91,7 @@ const {
 } = require('./utils/users');
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/xeroxchat').then(() => console.log('Connected to MongoDB'))
+mongoose.connect('mongodb+srv://rahulbus145:Anshj870755@chating-data.tpfb5.mongodb.net/?retryWrites=true&w=majority&appName=chating-data').then(() => console.log('Connected to MongoDB'))
 .catch((err) => console.error('Failed to connect to MongoDB', err));
 
 // Message model
@@ -107,7 +107,7 @@ const server = http.createServer(app);
 app.use(cors());
 const io = socketIo(server, {
    cors: {
-      origin: "*", // Or specify the frontend URL if needed, e.g., 'https://yourfrontend.com'
+      origin: "/index.html",
       methods: ["GET", "POST"],
    },
 });
